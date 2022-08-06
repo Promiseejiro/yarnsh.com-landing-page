@@ -7,7 +7,7 @@ const featureContainers = document.querySelectorAll(".feature-item");
 const closePopBtn = document.querySelector(".close-pop-btn");
 const getRideForm = document.querySelector(".pop-out-forms");
 console.log(getRideForm);
-const showGetRideFormBtn = document.querySelector(".get-a-ride-btn");
+const showGetRideFormBtn = document.querySelectorAll(".get-a-ride-btn");
 const closeGetRideFormBtn = document.querySelector(
   ".close-get-a-ride-form-btn"
 );
@@ -21,10 +21,11 @@ const closePopUp = () => {
   popUp.style.display = "none";
 };
 
-showGetRideFormBtn.addEventListener("click", () => {
-  getRideForm.style.display = "grid";
+showGetRideFormBtn.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    getRideForm.style.display = "grid";
+  });
 });
-
 // events
 featureContainers.forEach((item) => {
   item.addEventListener("click", showPopUp);
