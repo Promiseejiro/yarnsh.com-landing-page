@@ -107,7 +107,7 @@ span {
   text-align: center;
   display: block;
   width: 100%;
-  min-width: 350px;
+  /* min-width: 350px; */
   height: 100%;
   margin-bottom: 2em;
 }
@@ -308,7 +308,7 @@ span {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 20em;
+  /* height: 20em; */
   margin: 1em auto;
   padding: 1rem 0;
   border-radius: 5px;
@@ -428,6 +428,13 @@ span {
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
   padding: 1.5em 1em;
   border-radius: 10px;
+  width: 450px;
+}
+
+@media (max-width: 756px) {
+  .get-ride-form {
+    width: fit-content;
+  }
 }
 
 .close-get-a-ride-form-btn {

@@ -52,11 +52,11 @@ header {
 
 .mobile-nav ul {
   padding-top: 3em;
-  padding-left: 1.5em;
+  padding-left: .45rem;
 }
 
 .mobile-nav ul li {
-  padding: 0.2em 0;
+  padding: 0.2rem .35rem;
 }
 
 .mobile-nav ul li:hover {
