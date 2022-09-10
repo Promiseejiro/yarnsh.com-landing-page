@@ -130,7 +130,22 @@ html::-webkit-scrollbar-thumb {
  color: var(--black);
  text-transform: none;
  line-height: 2;
-}  
+}
+.form-control {
+    border: none!important;
+}
+label {
+    color: #219150;
+    font-weight: 650;
+}
+.form-control input {
+    display: block;
+    border: none;
+    border-bottom: 1px solid var(--light-color);
+    padding: 2px;
+    font-size: 15px;
+    width: 100%;
+} 
    
    
 /*=====  Responsive  =====*/

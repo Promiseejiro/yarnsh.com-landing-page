@@ -159,25 +159,21 @@
           </div>
           <section class="form-section">
             <div class="pop-out-forms">
-              <form class="get-ride-form" action="">
+              <form class="get-ride-form" action="order" method="post" id="form">
                 <button class="close-get-a-ride-form-btn">
                   <i class="fa fa-times"></i>
                 </button>
                 <p>All input field are required</p>
                 <div class="form-control">
-                  <label for="">Pick location</label>
-                  <input type="text" />
+                  <label for="">Pickup</label>
+                  <input type="text" name="pickup" required />
                 </div>
                 <div class="form-control">
-                  <label for="">Pick location</label>
-                  <input type="text" />
+                  <label for="">Destination</label>
+                  <input type="text" name="destination" required />
                 </div>
                 <div class="form-control">
-                  <label for="">Pick location</label>
-                  <input type="text" />
-                </div>
-                <div class="form-control">
-                  <input id="get-ride-submit-btn" type="submit" />
+                  <input id="get-ride-submit-btn" name="order" class="action" type="submit" value="Order Now" />
                 </div>
               </form>
             </div>
@@ -312,6 +308,10 @@
       // function redirect() {
       //   window.location.href = "agent/hostels";
       // }
+
+      document.querySelector('#form').addEventListener('submit', () => {
+        document.querySelector('.action').innerText = "Processing...";
+      });
     </script>
   </body>
 </html>
