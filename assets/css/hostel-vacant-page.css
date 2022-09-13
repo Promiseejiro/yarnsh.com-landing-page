@@ -13,6 +13,28 @@
   --secondary-font: "Poppins", sans-serif;
 }
 
+.btn {
+  margin-bottom: 1rem;
+  display: inline-block;
+  padding: .5rem 3rem;
+  border-radius: .5rem;
+  color: #fff;
+  background: var(--green);
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: transparent!important;
+  border: transparent!important;
+  box-shadow: none!important;
+  /* width: 100%; */
+}
+.btn:hover,
+.btn:active {
+  background: var(--dark-green);
+  color: #fff;
+  font-weight: 600;
+}
+
 .menu-btn {
   display: none;
 }
