@@ -9,8 +9,13 @@ extract($_POST);
 if (isset($_POST['book'])) {
     extract($_POST); #print_r($_POST); exit;
 
-    $newBooking = $rider->newBook();
+    $booking_id = time();
 
+    $newBooking = $rider->newBook($pickup, $destination, $name, $number, $booking_id, $date);
+
+    if ($newBooking) {
+        header('location: ticket?id='.$booking_id.'&name='.$name.'&start='.$pickup.'&end='.$destination.'');
+    }
 }
 
 ?>
@@ -37,7 +42,9 @@ if (isset($_POST['book'])) {
     <!--  Favicon  -->
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
 
+    <script src="assets/js/sweetalert2.min.js"></script>
     <!---  Stylesheets  --->
+    <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css"> <!-- Bootstrap -->
     <link rel="stylesheet" href="assets/css/all.css"> <!-- Font-awesome -->
     <link rel="stylesheet" href="assets/css/terms&privacy.css"> <!-- Main -->
@@ -92,6 +99,11 @@ if (isset($_POST['book'])) {
                 <div class="form-control">
                     <label for="">Name</label>
                     <input type="text" name="name" required />
+                </div>
+
+                <div class="form-control">
+                    <label for="">Number</label>
+                    <input type="tel" name="number" required />
                 </div>
 
                 <div class="form-control">

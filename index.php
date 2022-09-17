@@ -173,7 +173,7 @@
                   <input type="text" name="destination" required />
                 </div>
                 <div class="form-control">
-                  <input id="get-ride-submit-btn" name="order" class="action" type="submit" value="Order Now" />
+                  <input id="get-ride-submit-btn" name="order" class="action" type="submit" value="Book Now" />
                 </div>
               </form>
             </div>

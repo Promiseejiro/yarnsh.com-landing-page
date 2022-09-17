@@ -160,11 +160,11 @@ class Agent
 
 class Ride extends Agent {
 
-  public function newBook()
+  public function newBook($pickup, $destination, $name, $number, $booking_id, $date)
   {
-    $sql = "INSERT INTO booking (pickup, destination, name, booking_id, rent, date)" . "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO booking (pickup, destination, name, number, booking_id, date)" . "VALUES (?,?,?,?,?,?)";
     $stmt = $this->db->prepare($sql);
-    $stmt->execute([ date('d M Y h:ia')]);
+    $stmt->execute([$pickup, $destination, $name, $number, $booking_id, $date]);
     return true;
   }
 
