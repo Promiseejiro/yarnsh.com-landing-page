@@ -1,6 +1,17 @@
 <?php
 
+require_once "classes/class.user.php";
+
+$rider = new Ride();
+
 extract($_POST);
+
+if (isset($_POST['book'])) {
+    extract($_POST); #print_r($_POST); exit;
+
+    $newBooking = $rider->newBook();
+
+}
 
 ?>
 
@@ -75,7 +86,7 @@ extract($_POST);
 
                 <div class="form-control">
                     <label for="">Date</label>
-                    <input type="datetime-local" name="name" required />
+                    <input type="datetime-local" name="date" required />
                 </div>
 
                 <div class="form-control">
@@ -84,7 +95,7 @@ extract($_POST);
                 </div>
 
                 <div class="form-control">
-                  <button class="btn">Book Now</button>
+                  <button class="btn" name="book" type="submit">Book Now</button>
                 </div>
             </form>
 

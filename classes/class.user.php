@@ -73,7 +73,8 @@ class Agent
 
  public function getPostedVacancy()
  {
-  $sql = "SELECT * FROM vacancy LIMIT 2";
+  // $sql = "SELECT * FROM vacancy LIMIT 2";
+  $sql = "SELECT * FROM vacancy ORDER BY id DESC LIMIT 3"; 
   $stmt = $this->db->prepare($sql);
   $stmt->execute();
   return $stmt;
@@ -81,7 +82,8 @@ class Agent
 
  public function getPostedVacancy_2($id)
  {
-  $sql = "SELECT * FROM vacancy WHERE id > ? LIMIT 2";
+  // $sql = "SELECT * FROM vacancy WHERE id > ? LIMIT 1";
+  $sql = "SELECT * FROM vacancy WHERE ? > id LIMIT 5";  //this shit is crap, i need more recent upload to take priority
   $stmt = $this->db->prepare($sql);
   $stmt->execute([$id]);
   if ($stmt->rowCount() > 0) {
@@ -89,20 +91,20 @@ class Agent
   }
  }
 
- public function getPostedVacancyAgent()
+ public function getPostedVacancyAgent($id) //agent display
  {
-  $sql = "SELECT * FROM vacancy";
+  $sql = "SELECT * FROM vacancy WHERE agent_id = ?";
   $stmt = $this->db->prepare($sql);
-  $stmt->execute();
+  $stmt->execute([$id]);
   return $stmt;
  }
 
  public function newVacancy($location, $area, $price, $type, $rent, $address, $description, $ag_name, $ag_phone, $agent_id)
  {
-  $image = '../assets/img/default.jpg';
+  $image = 'assets/img/default.jpg';
   $sql = "INSERT INTO vacancy (location, area, price, type, rent, address, description, agent_name, agent_number, agent_id, agent_image, date)" . "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
   $stmt = $this->db->prepare($sql);
-  $stmt->execute([$location, $area, $price, $type, $rent, $address, $description, $ag_name, $ag_phone, $agent_id, $image, date('d M Y h:ia')]);
+  $stmt->execute([$location, $area, number_format($price), $type, $rent, $address, $description, $ag_name, $ag_phone, $agent_id, $image, date('d M Y h:ia')]);
   return true;
   // date('Y.m.d h:i:sa')
  }
@@ -152,5 +154,18 @@ class Agent
    $stmt->execute([$id]);
    return true;
  }
+
+}
+
+
+class Ride extends Agent {
+
+  public function newBook()
+  {
+    $sql = "INSERT INTO booking (pickup, destination, name, booking_id, rent, date)" . "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute([ date('d M Y h:ia')]);
+    return true;
+  }
 
 }

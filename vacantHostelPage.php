@@ -1,3 +1,13 @@
+<?php
+
+require_once "classes/class.user.php";
+
+$agent = new Agent();
+
+$result = $agent->getPostedVacancy();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,6 +25,8 @@
     <meta name="description" content="Yarnsh is a community of student built by students for students">
     <meta name="twitter:card" content="https://assets/img/Yarnshc.jpg">
 
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="./assets/css/hostel-vacant-page.css" />
     <link rel="stylesheet" href="./assets/css/header.css" />
     <link rel="stylesheet" href="./assets/css/footer.css" />
@@ -86,133 +98,151 @@
       <main>
         <h1><span>Vacancies</span></h1>
 
-        <div class="vacancies">
-          <div class="vacant-card">
-            <h2>Bedsitter</h2>
-            <p class="vacant-card-label">location</p>
-            <p>enginering faculty</p>
-            <p class="vacant-card-label">price</p>
-            <h4><span> &#x20A6;3000</span></h4>
-            <p class="vacant-card-posted">
-              posted <span>30 june 2022 12:04pm</span>
-            </p>
-           <a href="./agent-page/agent-page.html"> <button class="vacant-card-btn">View Details</button></a>
-          </div>
-        </div>
+        <?php if($result !== null) { foreach($result as $results): ?>
 
         <div class="vacancies">
           <div class="vacant-card">
-            <h2>Bedsitter</h2>
+            <h2><?php echo $results['type']; ?></h2>
             <p class="vacant-card-label">location</p>
-            <p>enginering faculty</p>
+            <p><?php echo $results['location']; ?></p>
             <p class="vacant-card-label">price</p>
-            <h4><span> &#x20A6;3000</span></h4>
+            <h4><span> &#x20A6;<?php echo $results['price']; ?></span></h4>
+            <?php #echo $results['id']; ?>
             <p class="vacant-card-posted">
               posted <span>30 june 2022 12:04pm</span>
             </p>
-           <a href="./agent-page/agent-page.html"> <button class="vacant-card-btn">View Details</button></a>
+           <a href="agent-page.php?name=<?php echo $results['agent_name']; ?>&no=<?php echo $results['agent_number']; ?>&img=<?php echo $results['agent_image']; ?>"> <button class="vacant-card-btn">View Details</button></a>
           </div>
         </div>
 
-        <div class="vacancies">
-          <div class="vacant-card">
-            <h2>Bedsitter</h2>
-            <p class="vacant-card-label">location</p>
-            <p>enginering faculty</p>
-            <p class="vacant-card-label">price</p>
-            <h4><span> &#x20A6;3000</span></h4>
-            <p class="vacant-card-posted">
-              posted <span>30 june 2022 12:04pm</span>
-            </p>
-           <a href="./agent-page/agent-page.html"> <button class="vacant-card-btn">View Details</button></a>
-          </div>
+        <?php endforeach;} else{ echo 'g'; exit; } ?>
+        
+        <div id="more_new"></div>
+        <div id="more">
+        <?php #echo $results['id']; ?>
+          <a href="javascript:void(0)" id="<?php echo $results['id']; ?>" class="show-more"> <button class="btn">View More</button></a>
         </div>
 
       </main>
       <footer>
-        <div>
-          <div class="quick-link">
-            <h4>QUICK LINK</h4>
-            <ul>
-              <li>
-                <a href="a/login.php"
-                  ><i class="fas fa-arrow-right" style="color: #219150"></i>
-                  Student Login</a
-                >
-              </li>
-              <li>
-                <a href="terms"
-                  ><i class="fas fa-arrow-right" style="color: #219150"></i>
-                  Terms</a
-                >
-              </li>
-              <li>
-                <a href="privacy"
-                  ><i class="fas fa-arrow-right" style="color: #219150"></i>
-                  Privacy</a
-                >
-              </li>
-            </ul>
-          </div>
+          <div>
+            <div class="quick-link">
+              <h4>QUICK LINK</h4>
+              <ul style="padding-left: 0;">
+                <li>
+                  <a href=""
+                    ><i class="fas fa-arrow-right" style="color: #219150"></i>
+                    Student Login</a
+                  >
+                </li>
+                <li>
+                  <a href="terms"
+                    ><i class="fas fa-arrow-right" style="color: #219150"></i>
+                    Terms</a
+                  >
+                </li>
+                <li>
+                  <a href="privacy"
+                    ><i class="fas fa-arrow-right" style="color: #219150"></i>
+                    Privacy</a
+                  >
+                </li>
+              </ul>
+            </div>
 
-          <div class="contact">
-            <h4>CONTACT</h4>
-            <ul>
-              <li>
-                <a href=""
-                  ><i class="fas fa-map-marker-alt" style="color: #219150"></i>
-                  Ufuoma plaza, Oleh, Delta State, Nigeria</a
-                >
-              </li>
-              <li>
-                <a href="mailto:support@yarnsh.com"
-                  ><i class="fas fa-envelope" style="color: #219150"></i>
-                  support@yarnsh.com</a
-                >
-              </li>
-              <li>
-                <a href="https://wa.me/2349050217462"
-                  ><i class="fab fa-whatsapp" style="color: #219150"></i>
-                  09050217462</a
-                >
-              </li>
-              <li>
-                <a href="tel:+234-905-021-7462"
-                  ><i class="fas fa-phone" style="color: #219150"></i>
-                  09050217462</a
-                >
-              </li>
-            </ul>
-          </div>
+            <div class="contact">
+              <h4>CONTACT</h4>
+              <ul style="padding-left: 0;">
+                <li>
+                  <a href=""
+                    ><i
+                      class="fas fa-map-marker-alt"
+                      style="color: #219150"
+                    ></i>
+                    Ufuoma plaza, Oleh, Delta State, Nigeria</a
+                  >
+                </li>
+                <li>
+                  <a href="mailto:support@yarnsh.com"
+                    ><i class="fas fa-envelope" style="color: #219150"></i>
+                    support@yarnsh.com</a
+                  >
+                </li>
+                <li>
+                  <a href="https://wa.me/2349050217462"
+                    ><i class="fab fa-whatsapp" style="color: #219150"></i>
+                    09050217462</a
+                  >
+                </li>
+                <li>
+                  <a href="tel:+234-905-021-7462"
+                    ><i class="fas fa-phone" style="color: #219150"></i>
+                    09050217462</a
+                  >
+                </li>
+              </ul>
+            </div>
 
-          <div class="more">
-            <h4>MORE</h4>
-            <ul>
-              <li>
-                <a href=""
-                  ><i class="fas fa-arrow-right" style="color: #219150"></i>
-                  About us</a
-                >
-              </li>
-              <li>
-                <a href="https://wa.me/2349050217462"
-                  ><i class="fas fa-arrow-right" style="color: #219150"></i>
-                  Report an issue</a
-                >
-              </li>
-              <li>
-                <a href="mailto:jobs@yarnsh.com"
-                  ><i class="fas fa-arrow-right" style="color: #219150"></i>Join
-                  us</a
-                >
-              </li>
-            </ul>
+            <div class="more">
+              <h4>MORE</h4>
+              <ul style="padding-left: 0;">
+                <li>
+                  <a href="about"
+                    ><i class="fas fa-arrow-right" style="color: #219150"></i>
+                    About us</a
+                  >
+                </li>
+                <li>
+                  <a href="https://wa.me/2349050217462"
+                    ><i class="fas fa-arrow-right" style="color: #219150"></i>
+                    Report an issue</a
+                  >
+                </li>
+                <li>
+                  <a href="mailto:jobs@yarnsh.com"
+                    ><i class="fas fa-arrow-right" style="color: #219150"></i
+                    > Join us</a
+                  >
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <p class="date">yarnsh.com &copy; <span class="year"></span></p>
-      </footer>
+          <p class="date">yarnsh.com &copy; <span class="year"></span></p>
+        </footer>
     </div>
-    <script src="./assets/js/header.js"></script>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <!---  jQuery  --->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!---  Bootstrap  --->
     <script src="assets/js/all.js"></script>
+    <!---  Font-awesome  --->
+    <!---  Main script  --->
+    <script src="assets/js/header.js"></script>
+    <!-- <script src="assets/js/main.js"></script> -->
+
+    <script>
+      $(document).on('click', '.show-more', function() {
+          var last_file_id = $(this).attr('id');
+          $('.show-more').html("Loading...");
+          $.ajax({
+              type: "post",
+              url: "agent/more.php",
+              data: {
+                  last_file_id : last_file_id
+              },
+              dataType: "text",
+              success: function(data) {
+                  if (data != "") {
+                      $('#more').remove();
+                      $('#more_new').append(data);
+                  }else {
+                      $('.show-more').html('No result');
+                  }
+              }
+          });
+      });
+    </script>
+
   </body>
 </html>

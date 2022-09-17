@@ -5,6 +5,8 @@ require_once '../components/home-head-2.php';
 
 $agent = new Agent();
 
+$result = $agent->getPostedVacancyAgent($_SESSION['id']);
+
 ?>
 
     <!--- Main section  --->
@@ -16,58 +18,51 @@ $agent = new Agent();
         <div class="row align-items-center container my-3 mx-auto" style="padding: .5rem;">
             <h1 class="text-center">Vacancies posted</h1>
             <a href="vacancy-post" style="border-radius: .4rem; width: fit-content; color: #fff; background: #27ae60; cursor: pointer; outline: transparent!important;border: transparent!important; box-shadow: none!important;">New Vacancy</a>
-            <a href="hostel" style="border-radius: .4rem; width: fit-content; color: #fff; background: #27ae60; cursor: pointer; outline: transparent!important;border: transparent!important; box-shadow: none!important; margin-left: auto;">View Vacancy</a>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col">S/N</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Area</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Type</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Agent in charge</th>
-                            <th scope="col">Contact</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Admin</th>
-                        </tr>
-                        <?php $result = $agent->getPostedVacancyAgent(); $num = 1;
-                            while ($row = $result->fetch()) {
-                                $id = $row['id'];
-                                $location = $row['location'];
-                                $area = $row['area'];
-                                $price = $row['price'];
-                                $type = $row['type'];
-                                $address = $row['address'];
-                                $description = $row['description'];
-                                $agent_name = $row['agent_name'];
-                                $agent_number = $row['agent_number'];
-                                $image = $row['agent_image'];
-                                $date = $row['date'];
-                        ?>
-                        <tr>
-                            <td scope="row"><?php echo $num; ?></td>
-                            <td><?php echo $location; ?></td>
-                            <td><?php echo $area; ?></td>
-                            <td><?php echo number_format($price); ?></td>
-                            <td><?php echo $type; ?></td>
-                            <td><?php echo $address; ?></td>
-                            <td><?php echo $description; ?></td>
-                            <td><?php echo $agent_name; ?></td>
-                            <td><?php echo $agent_number; ?></td>
-                            <td> <?php echo '<img src="'.$image.'" width=50; height=50; alt="">';?> <a href="picture?id=<?php echo $id ?>" style="font-weight: 650; text-decoration: underline!important;">EDIT</a></td>
-                            <td><?php echo $date; ?></td>
-                            <td><a href="delete?id=<?php echo $id; ?>" class="btn btn-danger" style="margin: .5rem;">Remove</a></td>
-                        <?php
-                        $num++; }
-                        ?>   
-                        </tr>
+            <a href="../vacancy" style="border-radius: .4rem; width: fit-content; color: #fff; background: #27ae60; cursor: pointer; outline: transparent!important;border: transparent!important; box-shadow: none!important; margin-left: auto;">View Vacancy</a>
+            <div class="container mt-5">
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-12 m-auto">
+                  <table class="table table-bordered table-hovered table-striped" id="vacancyTable" style="margin-top: 1rem;">
+                    <thead>
+                      <th> Location </th>
+                      <th> Area </th>
+                      <th> Price </th>
+                      <th> Type </th>
+                      <th> Address </th>
+                      <th> Description </th>
+                      <th> Agent </th>
+                      <th> Contact </th>
+                      <th> Image </th>
+                      <th> Date </th>
+                      <!-- <th> Actions </th> -->
                     </thead>
-                </table>
-            </div>
+
+                    <tbody>
+
+                        <?php 
+                            foreach($result as $results): 
+                        ?>
+
+                        <tr>
+                          <td> <?php echo $results['location']; ?> </td>
+                          <td> <?php echo $results['area']; ?> </td>
+                          <td> <?php echo $results['price']; ?> </td>
+                          <td> <?php echo $results['type']; ?> </td>
+                          <td> <?php echo $results['address']; ?> </td>
+                          <td> <?php echo $results['description']; ?> </td>
+                          <td> <?php echo $results['agent_name']; ?> </td>
+                          <td> <?php echo $results['agent_number']; ?> </td>
+                          <td> <img src="<?php echo "../".$results['agent_image']; ?>" width="60" height="60" alt="agent picture"> </td>
+                          <td> <?php echo $results['date']; ?> </td>
+                        </tr>
+
+
+                      <?php endforeach; ?>	
+                    </tbody>	
+                  </table>
+                </div>
+              </div>
+            </div> 
 
         <div class="footer">
             <div class="copyright" style="text-align: center; color: #27ae60; font-weight: 600; margin-top: 3rem;">
@@ -85,8 +80,20 @@ $agent = new Agent();
     <!--- Main section ends  --->
 
 
-<?php
+<!---  JavaScripts  --->
+<script src="../assets/js/jquery.min.js"></script>       <!---  jQuery  --->
+<script src="../assets/js/jquery.dataTables.min.js"></script> 
+<script src="../assets/js/bootstrap.min.js"></script>     <!---  Bootstrap  --->
+<script src="../assets/js/all.js"></script>               <!---  Font-awesome  --->
+<script src="../assets/js/register.js"></script>          <!---  Main script  --->
 
-require_once '../components/home-foot.php';
+<script>
 
-?>
+    $(document).ready(function() {
+      $('#vacancyTable').DataTable();
+    });
+
+</script>
+
+</body>
+</html>

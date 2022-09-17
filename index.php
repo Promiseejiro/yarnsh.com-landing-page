@@ -303,8 +303,9 @@
     <script src="assets/js/all.js"></script>
     <!---  Font-awesome  --->
     <!---  Main script  --->
-    <script src="./assets/js/header.js"></script>
-    <script src="./assets/js/main.js">
+    <script src="assets/js/header.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
       // function redirect() {
       //   window.location.href = "agent/hostels";
       // }
