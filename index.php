@@ -310,9 +310,22 @@
       //   window.location.href = "agent/hostels";
       // }
 
-      document.querySelector('#form').addEventListener('submit', () => {
-        document.querySelector('.action').innerText = "Processing...";
-      });
+      // document.querySelector('#form').addEventListener('submit', () => {
+      //   document.querySelector('.action').innerText = "Processing...";
+      // });
+
+      window.addEventListener('load', function() { 
+        //console.log('hello!');
+        $.ajax({
+          url: 'count',
+          type: 'post',
+          success: function(data){
+            // Perform operation on return value
+            //console.log('g');
+            //window.location = 'home';
+          }
+        });
+      }, false);
     </script>
   </body>
 </html>

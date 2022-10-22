@@ -21,7 +21,7 @@ $result = $agent->getPostedVacancyAgent($_SESSION['id']);
             <a href="../vacancy" style="border-radius: .4rem; width: fit-content; color: #fff; background: #27ae60; cursor: pointer; outline: transparent!important;border: transparent!important; box-shadow: none!important; margin-left: auto;">View Vacancy</a>
             <div class="container mt-5">
               <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-12 m-auto">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-12 m-auto table-responsive">
                   <table class="table table-bordered table-hovered table-striped" id="vacancyTable" style="margin-top: 1rem;">
                     <thead>
                       <th> Location </th>
@@ -34,7 +34,7 @@ $result = $agent->getPostedVacancyAgent($_SESSION['id']);
                       <th> Contact </th>
                       <th> Image </th>
                       <th> Date </th>
-                      <!-- <th> Actions </th> -->
+                      <th> Actions </th>
                     </thead>
 
                     <tbody>
@@ -54,6 +54,9 @@ $result = $agent->getPostedVacancyAgent($_SESSION['id']);
                           <td> <?php echo $results['agent_number']; ?> </td>
                           <td> <img src="<?php echo "../".$results['agent_image']; ?>" width="60" height="60" alt="agent picture"> </td>
                           <td> <?php echo $results['date']; ?> </td>
+                          <td> 
+                            <?php echo '<a href="delete.php?id='.$results['id'].'" class="btn btn-danger">Delete</a>'; ?>  
+                          </td>
                         </tr>
 
 

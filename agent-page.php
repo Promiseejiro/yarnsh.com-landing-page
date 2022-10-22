@@ -1,3 +1,11 @@
+<?php
+
+require_once "classes/class.user.php";
+
+$agent = new Agent();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -80,7 +88,7 @@
   <div class="agents-container">
     <div class="agent-card">
       <div class="agent-info">
-        <h3>Student/agent <span style="color: #219150;">3 vacancies</span></h3>
+        <h3>Agent <span style="color: #219150;"><?php if(isset($_GET['id'])) { $agent_id = $_GET['id']; $count = $agent->getAgentTotalPost($agent_id); } ?> Vacancy</span></h3>
         <img src="<?php if(isset($_GET['img'])) echo $_GET['img']; ?>" alt="agent picture">
         <div>
           <h4> Name:<span><?php if(isset($_GET['name'])) echo $_GET['name']; ?></span></h4>

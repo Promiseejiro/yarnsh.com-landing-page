@@ -74,7 +74,7 @@ class Agent
  public function getPostedVacancy()
  {
   // $sql = "SELECT * FROM vacancy LIMIT 2";
-  $sql = "SELECT * FROM vacancy ORDER BY id DESC LIMIT 3"; 
+  $sql = "SELECT * FROM vacancy ORDER BY id DESC LIMIT 10"; 
   $stmt = $this->db->prepare($sql);
   $stmt->execute();
   return $stmt;
@@ -83,7 +83,7 @@ class Agent
  public function getPostedVacancy_2($id)
  {
   // $sql = "SELECT * FROM vacancy WHERE id > ? LIMIT 1";
-  $sql = "SELECT * FROM vacancy WHERE ? > id LIMIT 5";  //this shit is crap, i need more recent upload to take priority
+  $sql = "SELECT * FROM vacancy WHERE ? > id LIMIT 10";  //this shit is crap, i need more recent upload to take priority
   $stmt = $this->db->prepare($sql);
   $stmt->execute([$id]);
   if ($stmt->rowCount() > 0) {
@@ -147,13 +147,57 @@ class Agent
    return true;
  }
 
- public function removeVacancy($id)
+//  public function removeVacancy($id)
+//  {
+//    $sql = "DELETE FROM vacancy WHERE id = ?";
+//    $stmt = $this->db->prepare($sql);
+//    $stmt->execute([$id]);
+//    return true;
+//  }
+
+ public function deleteVacancy($id)
  {
    $sql = "DELETE FROM vacancy WHERE id = ?";
    $stmt = $this->db->prepare($sql);
    $stmt->execute([$id]);
    return true;
  }
+
+ public function getSumOfUser()
+  {
+    $query = "SELECT COUNT(*) FROM user";
+    $stmt = $this->db->prepare($query);
+    $stmt->execute();
+
+    $count = $stmt->fetchColumn();
+    print $count;
+
+  }
+
+  public function getAgentTotalPost($id)
+  {
+    $query = "SELECT COUNT(*) FROM vacancy WHERE agent_id = ?";
+    $stmt = $this->db->prepare($query);
+    $stmt->execute([$id]);
+
+    $count = $stmt->fetchColumn();
+    print $count;
+
+  }
+
+  public function getVacantDetails($id)
+  {
+    $query = "SELECT * from vacancy WHERE id = ?";
+
+    $stmt = $this->db->prepare($query);
+    $stmt->execute([$id]);
+
+    $count_row = $stmt->rowCount();
+
+    if ($count_row == 1) {
+      return $stmt;
+    }
+  }
 
 }
 
@@ -166,6 +210,60 @@ class Ride extends Agent {
     $stmt = $this->db->prepare($sql);
     $stmt->execute([$pickup, $destination, $name, $number, $booking_id, $date]);
     return true;
+  }
+
+}
+
+
+class Count extends Agent {
+
+  public function recordCount($new_count)
+  {
+    $sql = "UPDATE counter SET visits = ?";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute([$new_count]);
+
+    return true;
+  }
+
+  public function getOldCount()
+  {
+    $query = "SELECT * FROM counter";
+    $stmt = $this->db->prepare($query);
+    $stmt->execute();
+    return $stmt;
+  }
+
+}
+
+class Admin extends Agent {
+
+  public function getTotalUsers()
+  {
+    $query = "SELECT * FROM booking";
+
+    $stmt = $this->db->prepare($query);
+    $stmt->execute();
+
+    $count_row = $stmt->rowCount();
+
+    if ($count_row > 0) {
+      return $stmt;
+    }
+  }
+
+  public function getTotalViews()
+  {
+    $query = "SELECT * FROM counter";
+
+    $stmt = $this->db->prepare($query);
+    $stmt->execute();
+
+    $count_row = $stmt->rowCount();
+
+    if ($count_row > 0) {
+      return $stmt;
+    }
   }
 
 }

@@ -14,6 +14,7 @@ if (isset($_POST['book'])) {
     $newBooking = $rider->newBook($pickup, $destination, $name, $number, $booking_id, $date);
 
     if ($newBooking) {
+        // $message = "<div class='alert alert-success' style='width: fit-content; margin: auto;'>Your ride has been booked successfuly!</div>";
         header('location: ticket?id='.$booking_id.'&name='.$name.'&start='.$pickup.'&end='.$destination.'');
     }
 }
@@ -72,6 +73,8 @@ if (isset($_POST['book'])) {
         <div class="sub">
             <h4>Complete your ride order</h4>
 
+            <?php if(isset($message)) echo $message; ?>
+
             <p style="margin-top: 1rem; font-size: .9rem; font-weight: 400; line-height: 2;">
                 Pickup locations: <span style="color: #219150; font-weight: 500;">Law faculty gate</span> & <span style="color: #219150; font-weight: 500;">Engineering gate</span>.
             </p>
@@ -102,8 +105,8 @@ if (isset($_POST['book'])) {
                 </div>
 
                 <div class="form-control">
-                    <label for="">Number</label>
-                    <input type="tel" name="number" required />
+                    <label for="">Phone Number</label>
+                    <input type="tel" name="number" maxlength="11" required />
                 </div>
 
                 <div class="form-control">

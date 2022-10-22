@@ -14,6 +14,7 @@ RewriteRule    ^privacy/?$    privacy.html    [NC,L]
 RewriteRule    ^order/?$    ride.php    [NC,L]
 RewriteRule    ^agent/?$    agent-page.php    [NC,L]
 RewriteRule    ^ticket/?$    ticket.php    [NC,L]
+RewriteRule    ^count/?$    count.php    [NC,L]
 
 # php -- BEGIN cPanel-generated handler, do not edit
 # Set the “ea-php80” package as the default “PHP” programming language.

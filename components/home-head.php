@@ -32,6 +32,7 @@ require_once "../classes/class.user.php";
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css"> <!-- Bootstrap -->
     <link rel="stylesheet" href="../assets/css/all.css"> <!-- Font-awesome -->
     <link rel="stylesheet" href="../assets/css/home.css"> <!-- Main -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
 
     <!--- Link for SEO Optimization  --->
     <link rel="canonical" href="https://yarnsh.com/agent/land.php" />

@@ -1,0 +1,19 @@
+Header set Access-Control-Allow-Origin "*"
+
+RewriteEngine On    # Turn on the rewriting engine
+
+RewriteCond %{HTTPS} !=on
+RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+
+RewriteRule    ^login/?$    signin.php    [NC,L]
+RewriteRule    ^home/?$    land.php    [NC,L]
+RewriteRule    ^booking/?$    book.php    [NC,L]
+RewriteRule    ^view/?$    page.php    [NC,L]
+
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “alt-php56” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-alt-php56 .php .php5 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

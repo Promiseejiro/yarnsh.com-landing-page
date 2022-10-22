@@ -111,7 +111,7 @@ $result = $agent->getPostedVacancy();
             <p class="vacant-card-posted">
               posted <span>30 june 2022 12:04pm</span>
             </p>
-           <a href="agent-page.php?name=<?php echo $results['agent_name']; ?>&no=<?php echo $results['agent_number']; ?>&img=<?php echo $results['agent_image']; ?>"> <button class="vacant-card-btn">View Details</button></a>
+           <a href="agent-page.php?name=<?php echo $results['agent_name']; ?>&no=<?php echo $results['agent_number']; ?>&img=<?php echo $results['agent_image']; ?>&id=<?php echo $results['agent_id']; ?>"> <button class="vacant-card-btn">View Details</button></a>
           </div>
         </div>
 
